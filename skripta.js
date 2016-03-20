@@ -27,11 +27,11 @@ window.addEventListener('load', function() {
 	var ustavi = false;
 	
 	var spremeniBarvo = function(id) {
-		document.getElementById("stroboskop").style.backgroundColor = "#"+vrednosti[id];
 
 		if (ustavi) {
 			ustavi = false;
 		} else {
+			document.getElementById("stroboskop").style.backgroundColor = "#"+vrednosti[id];
 			novId = (id+1) % vrednosti.length;
 			timeout = Math.floor((Math.random() * (maxCas-minCas)) + minCas);
 			setTimeout(function() {spremeniBarvo(novId)} , timeout);
@@ -40,6 +40,10 @@ window.addEventListener('load', function() {
 	
 	var stop = function(event) {
 		ustavi = true;
+		var start = document.querySelector("#start"); 
+ 		start.removeEventListener('click', stop); 
+ 		start.addEventListener('click', zagon); 
+ 		start.innerHTML="Zaženi stroboskop";
 	}
 	
 	var zagon = function(event) {
